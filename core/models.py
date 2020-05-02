@@ -42,6 +42,7 @@ from wagtail.admin.edit_handlers import (
 )
 from wagtail.embeds.embeds import get_embed
 from wagtail.embeds.blocks import EmbedBlock
+from wagtail.embeds.oembed_providers import youtube
 from wagtail.search import index
 from wagtail.snippets.blocks import SnippetChooserBlock
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
@@ -329,6 +330,11 @@ class EmbeddedMediaValue(StructValue):
 
 class EmbeddedMediaBlock(StructBlock):
     embed = EmbedBlock(help_text="URL to the content to embed.")
+    size = ChoiceBlock(
+        choices=[("small", "Small"), ("medium", "Medium"), ("large", "Large")],
+        default="small",
+        help_text="Width of image in article.",
+    )
 
     class Meta:
         value_class = EmbeddedMediaValue
